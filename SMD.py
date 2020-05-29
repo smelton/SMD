@@ -71,7 +71,7 @@ def SMD(X,k_guess, trials = None,n_sub = None,prop_algo = 'agglo', class_algo = 
 	counts = ray.get(ray_jobs)
 	gd,_ = np.histogram(counts, np.arange(X.shape[1]+1), density = True)
 	X_shuffled = shuffle_data(X)
-	ray_jobs = [find_planes_agglo(X_shuffled,n_sub, cluster_prior) for _ in range(trials)]
+	ray_jobs = [get_classifier_dims(X_shuffled,n_sub, cluster_prior,cluster_algo) for _ in range(trials)]
 	ray_jobs = [i for k in ray_jobs for i in k]
 	counts = ray.get(ray_jobs)
 	g_shuffled,_ = np.histogram(counts, np.arange(X.shape[1]+1), density = True)
