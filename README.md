@@ -1,5 +1,7 @@
 # SMD
 
+See sample_usage.py for an example.
+
 The function SMD has the following inputs:
 
 X := Data matrix with dimensions (number of data points) x (number of features).
