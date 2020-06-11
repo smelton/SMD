@@ -31,4 +31,6 @@ Typical usage, for some X
 
 z = SMD(X,7,trials = 1000)
 
+SMD_serial.py and sample_usage_serial.py are contingencies that implement the algorithm without parallelization. It will be slower, but works if Ray is giving errors.
+
 See here for details: https://arxiv.org/abs/1910.05814
