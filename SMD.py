@@ -66,18 +66,18 @@ def SMD(X,k_guess, trials = None,n_sub = None,prop_algo = 'agglo', class_algo = 
 
 	cluster_prior = [cluster_prior_min,int(2*k_guess)]
 	Xid = ray.put(X)
-
 	ray_jobs = [get_classifier_dims.remote(Xid,n_sub, cluster_prior, cluster_algo) for _ in range(trials)]
 	ray_jobs = ray.get(ray_jobs)
 	counts = [i for k in ray_jobs for i in k]
-	gd,_ = np.histogram(counts, np.arange(X.shape[1]+1), density = True)
+	gd,_ = np.histogram(counts, np.arange(D+1), density = True)
 	if z_score:
 		X_shuffled = shuffle_data(X)
+		del Xid, X
 		X_sid = ray.put(X_shuffled)
 		ray_jobs = [get_classifier_dims.remote(X_sid,n_sub, cluster_prior,cluster_algo) for _ in range(trials)]
 		ray_jobs = ray.get(ray_jobs)
 		counts = [i for k in ray_jobs for i in k]
-		g_shuffled,_ = np.histogram(counts, np.arange(X.shape[1]+1), density = True)
+		g_shuffled,_ = np.histogram(counts, np.arange(D+1), density = True)
 		Z_d = (gd-g_shuffled.mean())/g_shuffled.std()
 		return Z_d
 	else:
