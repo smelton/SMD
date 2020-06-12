@@ -63,7 +63,7 @@ def SMD(X,k_guess, trials = None,n_sub = None,prop_algo = 'agglo', class_algo = 
 		print(class_algo, ' is not a supported classifier.')
 		return 0
 
-	cluster_prior = [3,int(2*k_guess)]
+	cluster_prior = [cluster_prior_min,int(2*k_guess)]
 
 	counts = [get_classifier_dims(X,n_sub, cluster_prior, cluster_algo) for _ in range(trials)]
 	counts = [i for k in counts for i in k]
