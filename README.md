@@ -34,3 +34,5 @@ z = SMD(X,7,trials = 1000)
 SMD_serial.py and sample_usage_serial.py are contingencies that implement the algorithm without parallelization. It will be slower, but works if Ray is giving errors.
 
 See here for details: https://arxiv.org/abs/1910.05814
+
+Ramanathan Lab members, or those using the Harvard Odyssey cluster, see Ramanathan_Internal for instructions on running via slurm job arrays instead of using Ray to parallelize.
